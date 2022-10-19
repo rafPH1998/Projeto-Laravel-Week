@@ -7,12 +7,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::prefix('/beers', EventsController::class)->group(function() {
-    Route::get('/', [BeerController::class, 'index']);
-    Route::get('/export', [BeerController::class, 'export']);
-});
-
-
+Route::prefix('/beers', BeerController::class)
+    ->middleware(['auth'])
+    ->group(function() {
+        Route::get('/', [BeerController::class, 'index']);
+        Route::get('/export', [BeerController::class, 'export']);
+    });
 
 Route::get('/dashboard', function () {
     return view('dashboard');
