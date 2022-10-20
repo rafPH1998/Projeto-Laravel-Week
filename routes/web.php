@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BeerController;
+use App\Http\Controllers\ExportController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -12,6 +13,9 @@ Route::prefix('/beers', BeerController::class)
     ->group(function() {
         Route::get('/', [BeerController::class, 'index']);
         Route::get('/export', [BeerController::class, 'export']);
+
+        Route::resource('reports', ExportControllerroller::class)
+            ->only(['index', 'show', 'destroy']);
     });
 
 Route::get('/dashboard', function () {
